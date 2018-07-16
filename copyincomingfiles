@@ -1,0 +1,20 @@
+import os, time, shutil
+
+path_to_watch = ("C:\\Incoming\\")
+destination = ("C:\\Destination\\")
+
+source_files = set(os.listdir(path_to_watch))
+new_files = set()
+
+while True:
+    for name in new_files:
+        if name.endswith('.txt'):
+            shutil.copy(os.path.join(path_to_watch,name), destination)
+    time.sleep(1)
+
+    new_files = set(os.listdir(path_to_watch))
+    new_files = new_files - source_files 
+    if new_files:
+        source_files = source_files.union(new_files)
+
+        
