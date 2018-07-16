@@ -1,0 +1,29 @@
+import os, time, subprocess, logging, sys
+path_to_watch = ("C:\\PRINT\\")
+before = dict ([(f, None) for f in os.listdir (path_to_watch)])
+
+def setup_custom_logger(name):
+    formatter = logging.Formatter(fmt='%(asctime)s %(levelname)-8s %(message)s',
+                                  datefmt='%Y-%m-%d %H:%M:%S')
+    handler = logging.FileHandler('printer.log', mode='a')
+    handler.setFormatter(formatter)
+    screen_handler = logging.StreamHandler()
+    screen_handler.setFormatter(formatter)
+    logger = logging.getLogger(name)
+    logger.setLevel(logging.DEBUG)
+    logger.addHandler(handler)
+    logger.addHandler(screen_handler)
+    return logger
+logger = setup_custom_logger('printer')
+while 1:
+  time.sleep (5)
+  after = dict ([(f, None) for f in os.listdir (path_to_watch)])
+  added = [f for f in after if not f in before]
+  if added:
+    ad = (", ".join(added))
+    logger.info('New file added: {}'.format(ad))
+    time.sleep (5)
+    subprocess.Popen('notepad.exe /p "%s%s"' %(path_to_watch, ad))
+    logger.info('File sended to printing: {}'.format(ad))
+  before = after
+
