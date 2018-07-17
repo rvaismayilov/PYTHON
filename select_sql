@@ -1,0 +1,12 @@
+import cx_Oracle , time, sys, csv, os.path, subprocess, os
+
+con = cx_Oracle.connect('USER/SID_NAME@192.168.1.1:1521/db_sid')
+
+cursor = con.cursor()
+cursor.execute('select * from table')
+
+print("fetchall:")
+result = cursor.fetchall() 
+for r in result:
+    print(r)
+
