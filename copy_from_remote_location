@@ -1,0 +1,22 @@
+import os, time, shutil
+
+path_to_watch = ("\\\\192.168.50.1\\\\c$\\\\Source\\\\")
+destination = ("\\\\192.168.50.2\\\\c$\\\\Dest\\\\")
+
+source_files = set(os.listdir(path_to_watch))
+new_files = set()
+
+while True:
+    for name in new_files:
+        if name.endswith('.dat'):
+            shutil.copy(os.path.join(path_to_watch,name), destination)
+            print ("New files have been copied!")
+    time.sleep(5)
+
+    new_files = set(os.listdir(path_to_watch))
+    new_files = new_files - source_files 
+    if new_files:
+        source_files = source_files.union(new_files)
+        print ("New files have been added!")
+
+        
