@@ -1,0 +1,18 @@
+import cx_Oracle , time, sys, csv, os.path, subprocess, os
+
+con = cx_Oracle.connect('USER/SID_NAME@192.168.1.1:1521/db_sid')
+
+cursor = con.cursor()
+
+cursor.execute("UPDATE  table set Column_a = 3 where Column_a = 2")
+con.commit()
+
+
+
+cursor = con.cursor()
+cursor.execute('select * from table order by Column_a desc')
+
+print("fetchall:")
+result = cursor.fetchall() 
+for r in result:
+    print(r)
