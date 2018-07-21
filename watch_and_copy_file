@@ -1,0 +1,16 @@
+import os, shutil, time, pathlib
+from os import path
+
+src = ("C:\\Users\\Desktop\\RAW\\1.dat")
+dest = ("C:\\Users\\Desktop\\XMLFILES\\")
+
+
+while True:
+    time.sleep(3)
+    file = pathlib.Path("C:\\Users\\Desktop\\RAW\\1.dat")
+    if file.exists ():
+        shutil.copy(src, dest)
+
+    after = dict ([(f, None) for f in os.listdir (dest)])
+    after = after
+    time.sleep(15)
