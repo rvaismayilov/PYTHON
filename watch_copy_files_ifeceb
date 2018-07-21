@@ -1,0 +1,61 @@
+import os, shutil, time, pathlib
+from os import path
+
+src = ("C:\\Users\\Desktop\\RAW\\1.dat")
+dest = ("C:\\Users\\Desktop\\XMLFILES\\")
+
+src1 = ("C:\\Users\\Desktop\\RAW\\2.dat")
+dest1 = ("C:\\Users\\Desktop\\XMLFILES\\")
+
+src2 = ("C:\\Users\\Desktop\\RAW\\3.dat")
+dest2 = ("C:\\Users\\Desktop\\XMLFILES\\")
+
+
+while True:
+    time.sleep(4)
+    file = pathlib.Path("C:\\Users\\Desktop\\RAW\\1.dat")
+    if file.exists ():
+        shutil.copy(src, dest)
+    else:
+        continue
+    
+    time.sleep(4)
+    if file.exists ():
+        dest = ("C:\\Users\\Desktop\\XMLFILES\\1.dat")
+        break
+    else:
+        continue
+    
+while True:
+    time.sleep(4)
+    file = pathlib.Path("C:\\Users\\Desktop\\RAW\\2.dat")
+    if file.exists ():
+        shutil.copy(src1, dest1)
+    else:
+        continue
+    
+    time.sleep(4)
+    if file.exists ():
+        dest1 = ("C:\\Users\\Desktop\\XMLFILES\\2.dat")
+        break
+    else:
+        continue
+
+while True:
+    time.sleep(4)
+    file = pathlib.Path("C:\\Users\\Desktop\\RAW\\3.dat")
+    if file.exists ():
+        shutil.copy(src2, dest2)
+    else:
+        continue
+    time.sleep(4)
+    if file.exists ():
+        dest2 = ("C:\\Users\\Desktop\\XMLFILES\\3.dat")
+        break
+    else:
+        continue
+    exit()    
+    
+    after = dict ([(f, None) for f in os.listdir (dest)])
+    after = after
+    time.sleep(1)
