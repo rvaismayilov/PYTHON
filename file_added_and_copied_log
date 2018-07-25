@@ -1,0 +1,30 @@
+import os, time, shutil
+
+esas = ("C:\\Users\\Desktop\\OLD\\")
+gedecek = ("C:\\Users\\Desktop\\XMLFILES\\")
+
+source_files = set(os.listdir(esas))
+new_files = set()
+before = dict ([(f, None) for f in os.listdir (esas)])
+
+before1 = dict ([(f, None) for f in os.listdir (esas)])
+
+while True:
+    for name in new_files:
+        if name.endswith('.txt'):
+            shutil.copy(os.path.join(esas,name), gedecek)
+        after1 = dict ([(f, None) for f in os.listdir (esas)])
+        added1 = [f for f in after if not f in before1]
+        if added1: print (" file has been copied!\n" .join(added), "file has been copied\n")
+        before1 = after1
+
+    time.sleep(1)
+
+    new_files = set(os.listdir(esas))
+    new_files = new_files - source_files 
+    if new_files:
+        source_files = source_files.union(new_files)
+        after = dict ([(f, None) for f in os.listdir (esas)])
+        added = [f for f in after if not f in before]
+        if added: print (" file has been added!\n" .join(added), "file has been added!\n")
+        before = after     
