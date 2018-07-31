@@ -1,0 +1,819 @@
+/opt/apache-tomcat-7.0.23
+http://citforum.ru/database/oracle/oracle_trace01/
+http://www.oracledba.ru/notes_trace.html
+
+-javaagent:/opt/apache-tomcat-7.0.23\lib\spring-instrument-3.0.3.RELEASE.jar
+http://www3.ntu.edu.sg/home/ehchua/programming/howto/tomcat_howto.html
+
+C:\Users\rvaismayilov\AppData\Roaming\Quest Software\Toad for Oracle\12.1\User Files\AWRReports
+
+https://cooljugator.com/ru              https://community.oracle.com/thread/382898       https://docs.oracle.com/cd/B28359_01/appdev.111/b28370/packages.htm#LNPLS009      https://docs.oracle.com/database/121/LNPLS/packages.htm#LNPLS00901
+http://www.orafaq.com/wiki/Cursor       https://www.tutorialspoint.com/plsql/plsql_packages.htm        http://engblog.ru/present-continuous-tense          https://www.tutorialspoint.com/plsql/plsql_cursors.htm
+https://blogs.oracle.com/oraclemagazine/working-with-cursors       https://russian.stackexchange.com/questions/8571/is-it-possible-to-translate-english-tenses-into-russian-tenses
+http://masterrussian.com/vocabulary/common_verbs.htm       https://www.dotnetperls.com/len-python   https://web.archive.org/web/20180220054928/https://belgeler.yazbel.com/python-istihza/etkilesimli_python.html
+
+# EXCEL  = https://www.ablebits.com/office-addins-blog/2016/03/02/identify-duplicates-excel/
+=REPLACE(H1,7,6,"******")
+=IF(COUNTIF($A$2:$A$10, $A2)>1, "Duplicate", "Unique")  
+=IF(COUNTIF($A$2:$A$10, $A2)>1, "Duplicate", "")
+
+openssl s_client -connect acs.bankofbaku.com:443
+openssl x509 -in Visa_sha2_cert.crt -text -noout
+
+---- VIEW certificate ----
+keytool -v -list -keystore certificates29112016.jks -storepass 123456 
+keytool -v -list -keystore certificates29112016.jks -storepass 123456 | grep "Valid from:"
+keytool -list -v -alias visads_1 -keystore certificates29112016.jks -storepass 123456 | grep "Valid from:"
+keytool -list -v -keystore certificates29112016.jks -storepass 123456
+keytool -list -v -keystore certificates29112016.jks -alias visasha2 -storepass 123456
+keytool -list -v -keystore certificates29112016.jks -alias visads_1 -storepass 123456
+keytool -list -v -keystore certificates.jks -storepass 123456 // ACS 
+keytool -list -keystore certificates29112016.jks -storepass 123456
+openssl x509 -in Visa_sha2_cert.crt  -text -noout | less
+keytool -certreq -keystore certificates29112016.jks -storepass 123456 -sigalg SHA256withRSA -alias visasha2 > mpivisasha2.csr
+
+---- Generate new Certificate 
+keytool -certreq -keystore certificates29112016.jks -storepass 123456 -alias visasha2 -sigalg SHA256withRSA
+keytool -certreq -keystore certificates29112016.jks -storepass 123456 -alias visasha2 -sigalg SHA256withRSA 
+keytool -genkey -keystore acs_http.jks -storepass 123456 -keylag RSA -keysize 2048 -sigalg SHA256withRSA -alias acs -dname="CN=acs.bb.com, O=bankofBaku, C=AZ"
+
+
+openssl x509 -enddate -noout -in file.pem
+---- CREATE certificate ----
+keytool -genkey -keystore certificates.jks -storepass 123456 -sigalg SHA256withRSA -keyalg RSA -keysize 2048 -dname "CN=3ds.bankofbaku.com, O=BankOfBaku OJSC, OU=Millikart LLC, L=Baku, S=Baku, C=AZ" -alias visasha2
+keytool -certreq -keystore certificates.jks -storepass 123456 -sigalg SHA256withRSA -alias visasha2
+https://www.digicert.com/help/   http://www.entrust.net/ssl-technical/csr-viewer.cfm   https://cryptoreport.websecurity.symantec.com/checker/views/csrCheck.jsp
+Create a private key   keytool -genkeypair -alias mycert -keyalg RSA -keysize 1024  -dname "CN=localhost,OU=Home,O=Home,L=SL,S=WS,C=LK"  -keypass mypkpassword -keystore mykeystore.jks -storepass mystorepassword
+
+openssl x509 -in epul.crt -noout -text
+
+keytool -list -keystore mpi_keystore.jks -storepass M@med517
+visa_ssl_server.key - RP4cwLhvQ2 
+
+---- INSTALL certificate ----
+keytool -import -keystore certificates29112016.jks -storepass 123456 -trustcacerts -file 3dsbankofbakucomf.crt -alias fraudcontrolnew
+keytool -delete -alias fraudcontrolnew  -keystore certificates29112016.jks -storepass 123456
+
+---- IMPORT certificate  ----
+keytool -importcert -v -noprompt -trustcacerts -alias verisigndemocert  -file verisign-demo-root-cert.pem -keystore mykeystore.jks -storepass mystorepassword
+keytool -import -keystore certificates02112016.jks -storepass 123456 -trustcacerts -file EXCH3.crt -alias mail
+keytool -importcert -v -noprompt -trustcacerts -alias maill -file EXCH3.crt -keystore certificates.jks -storepass 12345
+openssl s_client -connect EXCH3.bankofbaku.com:25 -starttls smtp
+
+openssl genrsa -out key_name.key 2048
+
+####### BPC ERROR -----
+keepalive doesnot works  - restart  crond - service crond restart (keepalive restrat)(*/20 * * * * /root/keep2alive.sh)
+sun.security.validator.ValidatorException: PKIX path building failed: -  Certificate not installed into certificates.jks file 
+++++
+ERROR ru.bpc.protocol.iso8583.io.GenericClient:252 - Parsing input message failed   
+ru.bpc.protocol.iso8583.ISO8583Exception: Field configuration 28 not available      -   Some meta-field does not exist on iso8583PaymentGateBakuold.xml file  path: WEB-INF/classes/iso8583
+++++
+ERROR ru.bpc.protocol.iso8583.io.GenericClient:225 - Connection is open false   
+ERROR ru.bpc.protocol.iso8583.io.GenericClient:226 - Incoming data read error java.nio.channels.ClosedChannelException: null  - Connection not exists from Cisco 
+++++
+cat /opt/jetty92/etc/jetty.xml
+
+java -cp java-mail-1.4.4.jar:activation.jar: Mailer -host 192.168.0.44 -port 587 -user mpi@bankofbaku.com -password P@ssword123 -protocol smtp -from mpi@bankofbaku.com -to rvaismayilov@bankofbaku.com -auth true
+route add -host 192.168.101.10 gw 192.168.101.1     route add -host 192.168.100.56 gw 192.168.100.40
+route del 192.168.101.10                            route del 192.168.101.10 gw 192.168.101.1
+route add -host 192.168.103.10 eth0                 route add default gw 192.168.1.1
+route del default gw 192.168.1.1                    route add -host 192.168.1.100 gw 192.168.1.2
+route del -host 192.168.1.100 gw 192.168.1.2        route add -host 192.168.100.40 eth1
+ip route add 192.168.100.56 via 192.168.100.40 dev eth1 
+
+route add -net 192.168.101.0/24 gw 192.168.101.1    route del -net 192.168.101.0/24 gw 192.168.101.1
+
+service --status-all       service --status-all | grep java     ip route show       route add default gw 192.168.1.254 eth0    ip route add 192.168.1.0/24 dev eth0     route add -net 172.17.2.0/24 gw 172.17.100.1
+
+# Date install   date -s "28 FEB 2017 12:30:00"
+virsh list      virsh managedsave-remove mpi_predpro      virsh start mpi_predpro      ntpdate -u 192.168.0.85    ntpdate -s 192.168.0.85
+# tar command    tar -cvzf logs.tar.gz file.org  |  tar -xvzf logs.tar.gz file.org   |  tar -cvzf logs.tar.gz * |
+
+# for i in {1..5}; do sh mycard.sh; done
+
+# awk command    awk 'NR==200,NR==500'     - prints line range in the file  |  awk 'NR==200,NR==500' logfile.log  
+tailf 2018_05_03.stderr.log | awk '{print NR ". " $0}'  - Make a number listing 
+awk 'NR==500000,NR==501500'   14:14 
+awk '//'
+awk '/cbc06441-a86b-4185-a0f3-a0db6c9fa957|38718d95-418a-45cf-9249-c67f5598cb79/'
+awk 'NR < 11'                - prints first 10 lines
+awk '{ y=x "\n" $0; x=$0 }; END { print y }'   - prints last 2 lines
+awk 'END { print }'   - prints last line
+awk '{print $2}'  
+awk '/1/ {print $0}' abc
+awk '$0 ~ /J/' 
+awk '$0 !~ /J/'
+awk '{ if ($0 ~ /J/) print }'
+awk '/cbc06441-a86b-4185-a0f3-a0db6c9fa957/'
+cat phone.txt | sed 's/\(.*)\)\(.*-\)\(.*$\)/Area\ code: \1 Second: \2 Third: \3/'
+
+tail -10 log.log
+tail -f /var/log/messages | awk '/ERROR/ {print "\033[31m" $0 "\033[39m"} /WARN/ {print "\033[31m" $0 "\033[39m"}'
+awk '/line where string stands/{ print NR; exit }' filename 
+awk '/testword/{ print NR; exit }' file.txt 
+awk '$0 ~ str{print NR-1 FS b}{b=$0}' str="search pattern"
+
+Print every line that is longer than 80 characters:
+awk 'length($0) > 80' data
+
+find $1 -type f -exec stat --format '%Y :%y %n' "{}" \; | sort -nr | cut -d: -f2- | head   -  find file change 
+find -cmin -15
+find . -mtime +3 -exec ls -l {} > last3days.txt \;
+
+Print the length of the longest input line:
+awk '{ if (length($0) > max) max = length($0) } END { print max }' data
+
+Print the length of the longest line in data:
+expand data | awk '{ if (x < length($0)) x = length($0) } END { print "maximum line length is " x }'
+
+iptables -A INPUT -s 65.55.44.100 -j DROP
+service iptables save
+
+grep -n 'search pattern' filename
+awk '/word/{print NR, $0}' filename
+less filename | awk '/45/{ print NR, $0}'
+--------------------------------------------------------------------
+awk '!($0 in array) { array[$0]; print }' filename      -  Remove duplicate lines using awk
+awk -F ':' '$3==$4' etc/passwd                          -  Print all lines from /etc/passwd that has the same uid and gid
+awk '{print $2,$5;}' filename                           -  Print only specific field from a file.
+vim +/search filename.txt  - Go to the first match of the specified
+vim +143 filename.txt      - Go to the 143rd line of file
+grep -w "50dde5df-80f9-4861-90df-0e8f2f6be297" -c 123.txt
+awk 'END{print NR}' file
+sed -n '$=' file
+grep -c ".*" file
+dd bs=4k count=655360 if=/root/file | wc -l &
+---------------------------------------------------------------------
+#!/bin/bash
+for i in 1 2 3 4 
+do
+cat 1 >> 2 
+done 
+----------------------------------------------------------------
+watch -n 5 ls -l
+while true; do sleep 5 ls -l done
+while true; do ls -l; sleep .5; done
+while :; do ls -lh | awk '/some*/{print $5}'; sleep 5; done
+--------------------------
+cat > while_check.sh
+#!/bin/bash while true; do /bin/sh script.sh ; sleep 100; done &
+cat > script.sh
+echo "Hello World"
+./while_check.sh
+ ------------------------------
+shopt -s cdspell
+export HISTTIMEFORMAT='%F %T '
+-------------------------
+export ORACLE_SID=newpayment
+sqlplus / as sysdba
+------------------------
+awk -v min=10000 -v max=1000000 'BEGIN{srand(); print int(min+rand()*(max-min+1))}'
+sed '1itothisline' input.txt > output.txt
+awk '/orderNumber=/ { print; print "new line"; next }1' foo.input
+----
+#!/bin/sh
+notefile=notefile
+date >> $notefile
+nano $notefile -f end-of-buffer
+----
+paste -d'&' -s file > out
+paste -d" " -s file > out
+cat myfile.txt | tr -d '\n' > oneline.txt | cat oneline.txt
+pgrep cron
+tail -f /var/log/cron
+awk 'BEGIN { ORS = "" } { print }' infile outfile > testfile
+sed -i.bck '$s/$/yourText2/' list.txt
+awk '{OFS=RS;$1=$1}1' file > file2  -  line into column 
+grep -Ev "^$|title1" datafile | sed 's/:.*//' | sort -u | tr '\n' '\t'; echo "";     grep -Ev "^$|title1" datafile | sed 's/title[0-9]://g' | paste - - - -
+sed 's/:/ /; /^$/d' datafile | sort | paste - - - - -
+sed 's/:/ /; /^$/d' datafile | sort | paste - - - - - | sed 's/\ttitle[0-9] / /g'
+---------------------------------------
+awk -F":" -v n=4 'BEGIN { x=1; c=0;} ++c <= n && x == 1 {print $1; buf = buf $2 "\n"; if(c == n) {x = 2; printf buf} next;}  !/./{c=0;next} c <=n {printf "%s\n", $2}' datafile | paste - - - - | column -t -s "$(printf "\t")"
+-----------------------------------------------------------
+awk ' { for (i=1; i<=NF; i++)  { a[NR,i] = $i } } NF>p { p = NF } END { for(j=1; j<=p; j++) {str=a[1,j]
+for(i=2; i<=NR; i++){str=str" "a[i,j]; }print str}}' file.txt
+--------------------------------------------------------------
+python -c "import sys; print('\n'.join(' '.join(c) for c in zip(*(l.split() for l in sys.stdin.readlines() if l.strip()))))" < input > output
+------------------------------
+sed = filename | sed 'N;s/\n/\t/'
+awk -F':' '{ print $1 }' /etc/passwd
+awk -F'x' '{ print $1 }' /etc/passwd
+awk -F'/' '{ print $1 }' /etc/passwd
+awk -F':' '{ print "User " $1 " login using " $7 " shell with as " $6 " home dir"}' /etc/passwd
+awk '{print NR,$0}' datafile | tr " ", "."
+awk '{print NR-0 ". " $0}' input > output
+split -b 100750k bigfile
+for i in {1..10}; do cat smallfile >> bigfile; done
+for i in $(seq 5);do date;done
+------ PERL -  perl perl.pl
+#!/usr/bin/perl
+for $i (1..5) {system("date");}
+---------------- 
+Python - python file.py 
+#!/usr/bin/python
+# Run unix date command 3 times
+import os;
+for x in range(0,3): os.system("date")
+----------------------
+tail -n +3 file | head -8
+sed -n '5,28p;' file
+sed -n '5,28p; 29q' file
+sed -n '3,+20p' file
+sed '5!d' file
+sed '5q;d' file
+cat -n file | grep -A 6 '^ *8'
+awk 'NR==5,NR==28' file 
+awk 'FNR==2{print $0 > "output.dat"}' file{1..5}.dat - copy 2nd line from dat file intu one file 
+awk '/string/{ print NR; exit }' file
+---
+export GREP_COLOR='1;37;41'
+egrep --color=auto -i '(error|fatal|warn|drop)' /var/log/messages
+egrep --color=auto -i '(ERROR|WARN)' file
+tail -f file | awk '/WARN/ {print "\033[32m" $0 "\033[39m"}/ERROR/ {print "\033[31m" $0 "\033[39m"}'
+egrep --color=auto -i '(20597|e2c580f3-f498-4b36-abce-2bed9b939607)' 2016_02_18.stderrout.log
+sed -e :a -e '$q;N;11,$D;ba'
+-------------
+#!/bin/bash
+if [ ! -f /root/test.txt ]; then
+    echo "File not found!"
+touch test.txt
+echo "File created!"
+else
+echo "File found!"
+fi
+--------------------------------------------------
+join myfile1.txt myfile2.txt > join.txt; cat join.txt
+comm myfile1.txt myfile2.txt
+sort data.txt > output.txt
+sort -o output.txt data.txt
+sort -r data.txt
+find -name "*.txt" -print0 | sort --files0-from=-
+uniq command  reports or filters out repeated lines in a file. 
+uniq -c file.txt uniq -d file.txt
+find / -type f -iname "*.txt"
+find . -type f -iname "*.txt"
+find . -type f -perm 0777 -print
+find / -type f ! -perm 777
+find / -perm /u=s
+find / -perm /u=r
+find / -perm /a=x
+find /home -user
+find / -mtime 50
+find / -atime 50
+find / -cmin -60
+find / -mmin -60
+find / -size 50M
+find / -size +50M -size -100M
+find / -type f -name *.mp3 -size +10M -exec rm {} \;
+find ./test -not -name "*.php"
+scp username@remotehost:/path/directory/\{foo.txt,bar.txt\} .
+rpm -qa --last
+ls /etc | tee stage1.txt | grep ^s | tee stage2.txt | sort -r
+ls /boot/ | tee -a file1.txt
+
+fdisk -s /dev/sda | awk '{$1=$1/1024/1024; print $1, "GB"}'
+echo "scale=2; $(sudo fdisk -s /dev/sda6) / 1024" | bc
+echo '100' | awk '{a=$1*1024*1024 ; print a " Bytes" }'
+
+useradd -G admins,webadmin,developers -c "Comment" -e 2016-04-30 -f 180 -u 4567 -d /opt/Newuserhome newuser; passwd newuser
+for user in `cat usss`; do userdel $user; done
+usermod -s /sbin/nologin tom
+awk '{print $2}' myfile
+cut  -f1-1 myfile > outfile; cat outfile - with TAB
+cut -d ' ' -f1-1 myfile > outfile; cat outfile - without TAB
+infocmp screen
+tput rmso
+---------------------
+for fg_color in {0..7}; do
+        set_foreground=$(tput setaf $fg_color)
+        for bg_color in {0..7}; do
+            set_background=$(tput setab $bg_color)
+            echo -n $set_background$set_foreground
+            printf ' F:%s B:%s ' $fg_color $bg_color
+        done
+        echo $(tput sgr0)
+    done
+---------------------
+grep '[^a-zA-Z0-9]' file 
+grep '[aA][Bb]' file 
+--
+
+wc -l filename - count line number on a file
+----------------
+openssl rand -base64 32
+date +%s | sha256sum | base64 | head -c 32 ; echo
+date | md5sum
+uuidgen
+
+-------------------
+# first we have to import random module as this provides the backbone for our random string
+# generator and then we have to import the string module.
+import random
+import string
+# now lets see what this string module provide us. I wont be going into depth because the python
+# documentation provides ample information. So lets generate a random string with 32 characters.
+random = ''.join([random.choice(string.ascii_letters + string.digits) for n in xrange(32)])
+print random
+----------------------
+uptime | awk '{print $2" " $3" " $4" "}' | sed -e 's/,.*//g'
+
+grep ZONE /etc/sysconfig/clock
+ls -l /etc/localtime
+date +%Z
+
+find . -name '*.*' | sed s/[^/]*\.desktop$// | uniq -c | sort -g
+
+script -qf | tee >(nc -kl 5000) >(nc -kl 5001) >(nc -kl 5002)
+nc 192.168.1.1 5000
+
+sed -i.bak '/^HERE IT IS/d' <file>      sed '/WARNING: /d' 2016_10_15.stderrout.log        sed '/pattern to match/d' ./infile
+vim +/killproc functions    awk '!/^HERE IT IS/' file > newfile
+
+
+sed '/WARNING: Interceptor for {http://soap.merchant.api.web.phoenix.bpc.ru/}MerchantServiceImplService has thrown exception, unwinding now/d' 2016_10_15.stderrout.log
+
+vi +LineNumber fileName    vim +546 functions
+
+awk '!/^WARNING: Interceptor for {http://soap.merchant.api.web.phoenix.bpc.ru/}MerchantServiceImplService has thrown exception, unwinding now/' 2016_10_15.stderrout.log 
+
+:g/WARNING: Interceptor for {http://soap.merchant.api.web.phoenix.bpc.ru/}MerchantServiceImplService has thrown exception, unwinding now/d
+:g/org.apache.cxf.binding.soap.SoapFault: Authentication failed/d
+
+Merchant Authentication File (MAF)
+
+find . -type f -mmin -3
+lsattr  filename
+find  -name '*.tar.gz' -type f -mtime 7 -exec rm -Rf {} \;
+iptables -L -v -n --line-numbers
+visudo - to change privilege
+
+For example, on Ubuntu 16.04, the sudo group has full admin privileges. We can grant a user these same privileges by adding them to the group like this:
+
+sudo usermod -aG sudo username    
+
+The gpasswd command can also be used:  sudo gpasswd -a username sudo    These will both accomplish the same thing.
+
+On CentOS, this is usually the wheel group instead of the sudo group:   sudo usermod -aG wheel username    Or, using gpasswd:
+
+sudo gpasswd -a username wheel
+
+How To Create Aliases
+
+The sudoers file can be organized more easily by grouping things with various kinds of "aliases".
+
+For instance, we can create three different groups of users, with overlapping membership:
+
+/etc/sudoers
+. . .
+User_Alias      GROUPONE = abby, brent, carl
+User_Alias      GROUPTWO = brent, doris, eric, 
+User_Alias      GROUPTHREE = doris, felicia, grant
+
+Group names must start with a capital letter. We can then allow members of GROUPTWO to update the apt database by creating a rule like this:
+
+/etc/sudoers
+. . .
+GROUPTWO    ALL = /usr/bin/apt-get update
+
+https://www.digitalocean.com/community/tutorials/how-to-edit-the-sudoers-file-on-ubuntu-and-centos
+
+sudo -u run_as_user command    sudo -g run_as_group command     sudo -l  sudo -L 
+
+http://www.opennet.ru/cgi-bin/opennet/man.cgi?topic=sudo          http://nginx.org/ru/docs/beginners_guide.html
+
+who  who -a  users    date -d @1527123456         date -s "08 FEB 2011 10:10:00"      date -s "12/08/2017 10:30:00"
+
+find . -type f ! -name '*.out' -type f ! -name '*.tar' -type f ! -name '*.txt' -delete
+find . ! -name '*.out'  ! -name '*.tar' -type f -delete
+find . ! -name 'test.txt' -type f -exec rm -f {} +
+find . ! -name 'test.txt' ! -name 'test2.txt' -type f -exec rm -f {} +
+
+ln -s existingfilefolder newlink    unlink linkfile 
+
+visudo 
+sudo ausearch -i -k mykey  sudo auditctl -w /etc/group -p wa -k mykey    find / -empty    How To Find Empty Files And Folders        find / -name *.txt  
+find . -name *.txt -fprint newfile.txt  find and insert to the new file /          find / -type d -name directoryname          find . -type f -name file.txt             find . -type f -name "*.txt"
+find . -type f -perm 0777 -print         find / -type f ! -perm 777          find / -perm 264            find / -perm 1551        find / -perm /u=s         find / -perm /g=s          find / -perm /u=r   find / -perm /a=x
+find / -type f -perm 0777 -print -exec chmod 644 {} \;     find / -type d -perm 777 -print -exec chmod 755 {} \;       find . -type f -name "tecmint.txt" -exec rm -f {} \;   find . -type f -name "*.txt" -exec rm -f {} \;
+find /tmp -type f -empty     find /tmp -type d -empty        find /tmp -type f -name ".*"       find / -user root -name tecmint.txt
+tcpdump -l -s0 -w - tcp dst port 80 | strings        tcpdump -l -s0 -w - tcp src port 80 | strings      tcpdump -i eth0 -l -s0 -w - host davepc and port 80 | strings | grep 'GET\|Host'     tcpdump -i eth0 dst 10.0.0.5 and port 53
+
+vmstat
+/usr/sbin/useradd -D
+nohup ./Zpay.sh > /dev/null 2>&1 &
+> is for redirect
+/dev/null is a black hole where any data sent, will be discarded
+2 is the file descriptor for Standard Error
+> is for redirect
+& is the symbol for file descriptor (without it, the following 1 would be considered a filename)
+1 is the file descriptor for Standard Out
+Therefore >/dev/null 2>&1 is redirect the output of your program to /dev/null. Include both the Standard Error and Standard Out.
+
+cat /etc/login.defs 
+
+date -d now   date -d today  date -d yesterday  date -d tomorrow  date -d sunday  date -d last-sunday  date +%s  date -d "1974-01-04" +"%s"    date -d "2017-12-08 12:12:12" +"%s"
+date -d "UTC 1970-01-01 126507600 secs"   date -d @126507600   date -d "2017-12-08" +"%A"   
+tar -cvf bkp-`date +%F`.tar.gz  FileorFoldername 
+tar -cvzf logs-`date +%F-%H-%M`.tar.gz file.org
+
+usermod -c "New user for Ibrahim" ibi   
+grep -E --color 'ibi' /etc/passwd 
+usermod -d /var/www/ ibi
+usermod -l newname existinguser
+chage -l username 
+usermod -e 2018-11-01 username  
+usermod -g newgroupname username  
+usermod -G group user
+usermod -U username  - lock user 
+usermod -U username  - unlock user 
+usermod -s /bin/sh username
+ps $$
+echo $0
+
+chsh --shell /bin/tcsh   chsh --shell /bin/bash  chsh --shell /bin/sh
+chsh --shell /bin/tcsh   chsh --shell /bin/bash  chsh --shell /bin/sh
+
+
+setfacl -R -m user:sam:--- /var/
+
+setfacl -m user:sam:rx /var/
+
+setfacl -R -m user:sam:rwx /var/xyz/
+stat /etc/passwd
+ls -i /etc/passwd
+chsh
+https://www.opennet.ru/docs/RUS/bash_scripting_guide/a14586.html
+https://habrahabr.ru/company/ruvds/blog/325522/
+http://najomi.org/_nix/sed
+http://rus-linux.net/MyLDP/consol/sed.html
+tailf 2017_12_22.stderrout.log | grep  "verifyEnrollment\|Unparsed VERes\|Checking VERes validity\|ThreeDSManager:588\|Formatted response:"
+tailf 2017_12_22.stderrout.log | egrep -wi --color "verifyEnrollment|Unparsed VERes|Checking VERes validity|ThreeDSManager:588|Formatted response:"
+
+
+export HISTTIMEFORMAT="%d/%m/%y %T "
+export PS1='\[\e[1;32m\][\u@\h \W]\$\[\e[0m\]'
+export GREP_COLOR='1;37;41'
+alias grep='grep --color=auto'
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+grep -lir "ipay.con" *
+awk '/821313ee-fcbe-421c-9ec7-3c7c7e83c2ba/' 2015_09_15.stderrout.log 
+awk 'NR==4000,NR==4500' 2015_09_15.stderrout.log 
+keytool -list -keystore certificates.jks -storepass 12345
+ausearch -m ALL --start today -i
+sudo ausearch -m ALL --start today -i
+tail -f 2016_10_18.stderrout.log | awk '/epul_75/ {print "\033[31m" $0 "\033[39m"}'
+egrep --color=auto -i '(service.Mailer)' 2017_03_13.stderrout.log
+egrep --color=auto -i '(65402c67-ad26-4bc0-886a-a20a7b4c7fac)' 2017_08_17.stderrout.log 
+grep --color=auto -i -A 16 "mdOrder='65402c67-ad26-4bc0-886a-a20a7b4c7fac'," 2017_08_17.stderrout.log 
+tail -f 2017_10_12.stderrout.log | awk '/NewTagFieldBuilder:105/ {print "\033[31m" $0 "\033[39m"} /Created new binding:/ {print "\033[31m" $0 "\033[39m"} /Starting reverse for mdOrder/ {print "\033[31m" $0 "\033[39m"}'
+tail -f 2017_10_19.stderrout.log | awk '/cap?RID=/ {print "\033[31m" $0 "\033[39m"}'
+tail -f 2017_10_20.stderrout.log | awk '/Checking authentication for azterra-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for premiumaz-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for signalforforex-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for rufaly-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for maxiaz-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for atlastravel_usd-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for buketaz-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for natali_travel_usd-api/ {print "\033[31m" $0 "\033[39m"} /FRAUD_ERROR/ {print "\033[31m" $0 "\033[39m"} /tao-bao_azn/ {print "\033[31m" $0 "\033[39m"} /Merchant not participating/ {print "\033[31m" $0 "\033[39m"}'
+grep -A 16 "mdOrder='fc5483b6-8752-44a3-8bef-48bf4302bf97'," 2017_10_19.stderrout.log | grep "Validating"
+tail -f 2017_10_24.stderrout.log | awk '/ISO8583Exception/ {print "\033[31m" $0 "\033[39m"} /Waiting for response/ {print "\033[31m" $0 "\033[39m"} /PKIX/ {print "\033[31m" $0 "\033[39m"}'
+tail -f 2017_11_22.stderrout.log | awk '/ERROR/ {print "\033[31m" $0 "\033[39m"} /WARN/ {print "\033[31m" $0 "\033[39m"} /PKIX/ {print "\033[31m" $0 "\033[39m"} /UserBlockService/ {print "\033[31m" $0 "\033[39m"} /FRAUD_ERROR/ {print "\033[31m" $0 "\033[39m"}'
+tail -f 2017_11_23.stderrout.log | awk '/Merchant not participating/ {print "\033[31m" $0 "\033[39m"} /TRACE ru.bpc.mpi.tds.utils.SigCheck:345/ {print "\033[31m" $0 "\033[39m"}'
+tail -f 2017_11_23.stderrout.log | awk '/ERROR/ {print "\033[31m" $0 "\033[39m"} /WARN/ {print "\033[31m" $0 "\033[39m"} /PKIX/ {print "\033[31m" $0 "\033[39m"} /UserBlockService/ {print "\033[31m" $0 "\033[39m"} /FRAUD_ERROR/ {print "\033[31m" $0 "\033[39m"}'
+grep -A 16 "mdOrder='6fbc8f1c-24da-41c7-8da3-acab80ed0a08'," 2018_01_04.stderrout.log | grep "Validating"
+tail -f 2018_01_11.stderrout.log | awk '/Checking authentication for azterra-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for premiumaz-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for signalforforex-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for rufaly-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for maxiaz-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for atlastravel_usd-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for buketaz-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for natali_travel_usd-api/ {print "\033[31m" $0 "\033[39m"} /FRAUD_ERROR/ {print "\033[31m" $0 "\033[39m"} /tao-bao_azn/ {print "\033[31m" $0 "\033[39m"} /Merchant not participating/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for magicwords-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for azeturizm_azn-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for azeturizm_usd-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for afntravel_azn-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for fworks_azn-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for mobilloto-api/ {print "\033[31m" $0 "\033[39m"}'
+tail -f 2018_01_11.stderrout.log | awk '/ERROR/ {print "\033[31m" $0 "\033[39m"} /WARN/ {print "\033[31m" $0 "\033[39m"} /PKIX/ {print "\033[31m" $0 "\033[39m"} /UserBlockService/ {print "\033[31m" $0 "\033[39m"} /FRAUD_ERROR/ {print "\033[31m" $0 "\033[39m"}'
+tail -f 2018_01_17.stderrout.log | awk '/Checking authentication for azterra-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for premiumaz-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for signalforforex-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for rufaly-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for maxiaz-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for atlastravel_usd-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for buketaz-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for natali_travel_usd-api/ {print "\033[31m" $0 "\033[39m"} /FRAUD_ERROR/ {print "\033[31m" $0 "\033[39m"} /tao-bao_azn/ {print "\033[31m" $0 "\033[39m"} /Merchant not participating/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for magicwords-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for azeturizm_azn-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for azeturizm_usd-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for afntravel_azn-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for fworks_azn-api/ {print "\033[31m" $0 "\033[39m"} /Checking authentication for mobilloto-api/ {print "\033[31m" $0 "\033[39m"}'
+tail -f 2018_01_17.stderrout.log | awk '/Merchant not participating/ {print "\033[31m" $0 "\033[39m"}'
+tail -f 2018_01_18.stderr.log | grep -n epul
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+systeminfo | find /i "install date"  wmic os get installdate  systeminfo | Select-String "Install Date:"  Powershell 
+less /proc/cpuinfo   nproc   lscpu     systemctl status network      systemctl testart NetworkManager.service   nmtui edit enp0s3    nmcli -p dev     hostnamectl set-hostname    systemctl start postfix.service 
+ip a s enp0s3       sar -u 2 5     mpstat -P ALL    ip monitor    ip m    ip r   grep -i  vendor /proc/cpuinfo    grep -i  model /proc/cpuinfo    sar -o output.file 12 8 >/dev/null 2>&1 &  
+ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10   iostat -xtc 5 3    
+ 
+sort -t: -k 3n /etc/passwd | more        ls *.jpg | xargs -n1 -i cp {} /tmp         bc  - calculator          getent services 22       df -T 
+
+awk 'BEGIN {print "Name\tDesignation\tDepartment\tSalary";} {print $2,"\t",$3,"\t",$4,"\t",$NF;} END{print "Report Generated\n--------------";}' emp
+
+find namedirectory -type f | wc -l
+
+ls -1 /usr/bin/ | wc -l     ls -l /usr/bin/ | grep -v ^l | wc -l     ls -l | grep -v ^l | wc -l     ls -1 | wc -l    find . -type f | wc -l
+ 
+tar -xf MyTar.tar --wildcards "*.jpg"          for j in *.txt; do mv -v -- "$j" "${j%.txt}.doc"; done  change fileext 
+ 
+tailf 2018_01_31.stderr.log | awk -v ORS='\033[39m\n-------------------------------------------------------------------------- NEW LINE ----------------------------------------------------------------------------------------\n' '/DEBUG/ {print "\033[32m" $0}'
+
+ls | while read upName; do loName=`echo "${upName}" | tr '[:upper:]' '[:lower:]'`; mv "$upName" "$loName"; done
+for f in `find`; do mv -v "$f" "`echo $f | tr '[A-Z]' '[a-z]'`"; done
+
+tailf | xargs -d"\n" -I {} date +"%Y-%m-%d %H:%M:%S {}"
+
+while read line; do echo `date` "$line" ; done      nano /etc/login.defs       ls -i1    find . -inum 136042336 -delete
+
+adduser someusera && sleep 600 && usermod --lock someusera &
+echo usermod --lock someuser | at now + 10 minutes
+
+ctrl +Z bg 
+
+https://bash.cyberciti.biz/guide/What_Is_Linux
+
+http://www.bogotobogo.com/python/python-Windows-Check-if-a-Process-is-Running-Hanging-Schtasks-Run-Stop.php
+
+https://www.thegeekstuff.com/2010/01/8-powerful-awk-built-in-variables-fs-ofs-rs-ors-nr-nf-filename-fnr/
+
+\033[0m Normal characters
+\033[1m  Bold
+\033[4m   underlined
+\033[5m  Blinking
+\033[7m  Reverse video
+
+find . -type f ! -name '*.out' -type f ! -name '*.tar' -type f ! -name '*.txt' -delete
+find . ! -name '*.out'  ! -name '*.tar' -type f -delete
+find . ! -name 'test.txt' -type f -exec rm -f {} +
+find . ! -name 'test.txt' ! -name 'test2.txt' -type f -exec rm -f {} +
+tail -f 2016_11_02.stderrout.log | awk '/ISO8583Exception/ {print "\033[31m" $0 "\033[39m"} /Waiting for response/ {print "\033[31m" $0 "\033[39m"}'
+какого падежа требует глагол 
+
+--------------------------------------------------------------------
+In vi program comands:   - :set number  - :set nu  - :set nonu  -  :set autoindent  -  :set noai  -  :1,$!sort
+4!!awk '{print "New text",$0}'  -  :1,$!awk '{print $1}' | sort | tr [:lower:] [:upper:]    -   :6,9w >> /tmp/newfile
+ps -e -o pid,vsz,comm= | sort -n -k 2     -    ps aux | awk '{print $2, $4, $11}' | sort -k2rn | head -n 20
+grep --color=auto -i -A 16 "mdOrder='1e334f9e-c368-4e65-9603-6dd0c4f8ab33'," 2016_06_11.stderrout.log
+for i in {1..20}; do sh mycard.sh; done    nohup ./Zpay.sh > /dev/null 2>&1 &
+
+----------------------- EXCEL  -------------
+=TRIM (A1)  - Remove leading spaces in cells with Trim function   -   =TRIM(CLEAN(A2))      - Removes all non printing
+=TRIM(CLEAN(SUBSTITUTE(B1,CHAR(160)," ")))    -   =MID(A1,5,255)   - removes first 5 characters    -   =RIGHT(A1,LEN(A1)-5)  - removes first 5 characters
+-------------------------------------------------------------------
+Salam.
+Qoşulma parametrlərini göndərirəm. Aşağıdakı linkdən istifadə edilməlidir. Burada orderNumber unikal olamalıdır, hər yeni sifariş üçün dəyişməlidir.
+
+1 aylıq ödəniş üçün :
+https://3ds.bankofbaku.com/newpayment/rest/register.do?amount=10&currency=944&language=en&orderNumber=1&userName=&password=&jsonParams={%22taxit%22:1}&returnUrl=http://www.epos.az
+
+3 aylıq ödəniş üçün :
+https://3ds.bankofbaku.com/newpayment/rest/register.do?amount=10&currency=944&language=en&orderNumber=1&userName=&password=&jsonParams={%22taxit%22:3}&returnUrl=http://www.epos.az
+
+6 aylıq ödəniş üçün :
+https://3ds.bankofbaku.com/newpayment/rest/register.do?amount=10&currency=944&language=en&orderNumber=1&userName=&password=&jsonParams={%22taxit%22:6}&returnUrl=http://www.epos.az
+
+Qoşulma parametri üçün username və password
+username -         password –  
+
+Admin konsol üçün daxil olma parametrləri
+URL - https://3ds.bankofbaku.com/newpayment/admin
+Username –         Password -  
+
+Zəhmət olmasa qoşulma parametri ilə əlaqədar göndərilmiş pdf faylını nəzərdən keçirin.
+
+export HISTTIMEFORMAT='%F %t '  -  echo 'export HISTTIMEFORMAT='%F %t '' >> ~/.bash_profile  -  echo 'export HISTTIMEFORMAT="%F %t "' >> ~/.bash_profile  -  HISTTIMEFORMAT="%d/%m/%y %T "
+echo 'export HISTTIMEFORMAT="%d/%m/%y %T "' >> ~/.bash_profile  - echo 'export HISTTIMEFORMAT="%d/%m/%y %T "' >> ~/.bash_profile  -  HISTFILESIZE=2000
+-----------------------
+>>>>>>>>>>>>>>>>>> unbind >>>>>>>>>>>>>>>>>>
+https://3ds.bankofbaku.com/newpayment/rest/unBindCard.do?userName=189taxi-api&password=T189M56t4&bindingId=779dc447-27e1-4296-b2f4-0268de530c6a
+https://3ds.bankofbaku.com/newpayment/rest/bindCard.do?userName=189taxi-api&password=T189M56t4&bindingId=4d8cf40a-5cee-497b-971c-0aab9de5d646
+>>>>>>>>>>>>>>>>>> unbind >>>>>>>>>>>>>>>>>>
+
+http://www.theunixschool.com/     http://www.ciscopress.com/articles/article.asp?p=2180210&seqNum=7     https://supportforums.cisco.com/document/127851/routing-protocol-selection-guide-igrp-eigrp-ospf-bgp#Interior_Gateway_Routing_Protocol_IGRP
+http://gramota.ru/slovari/dic/  - http://seelrc-iis.trinity.duke.edu/russdict/word.aspx?nWordID=408546 - http://www.native-english.ru/translate - http://www.correctenglish.ru/mistakes/grammar/present-simple/
+http://www.russianlessons.net/grammar/nouns_gender.php  https://www.lingq.com/learn/ru/preview/item/313020/ http://speak-russian.cie.ru/time_new/rus/grammar/ http://nashol.com/2011060955536/tablica-padejei-russkogo-yazika.html
+https://www.lingq.com/learn/ru/preview/item/365662/ http://language.az/07151128.html http://azerbaycandili.ucoz.org/index/hal_kateqoriyasi/0-13 http://www.deutsch.az/1/pages/112  http://masterrussian.com/httelltime.shtml
+http://vnutrislova.net http://interneturok.ru/ http://russkiiyazyk.ru/ http://rusgram.ru  http://ruscayds.blogspot.com/2014/03/padej-8-edatli-hal-ozet-bilgiler.html http://slovar-vocab.com/russian-english/general-subjects-vocab.html
+http://dic.academic.ru/  http://context.reverso.net/ http://www.learnrussianweb.com/2009/12/1_11.html     http://numeralonline.ru/      http://slovonline.ru/slovar_el_fonetic/b-24/id-155873/chetyre.html        https://ru.wiktionary.org/wiki/%D0%B2   http://www.russianforeveryone.com/Rufe/Lessons/Course1/Introduction/IntrUnit5/IntrUnit5.htm
+http://text.ru/spelling/576a75b54dd91  http://morpher.ru/Demo.aspx        https://www.lingq.com/learn/ru/workdesk/item/12645460/reader/         http://www.russisch-fuer-kinder.de/de_start/tests/tests.php?fall=416      http://nashi-detochki.ru/uchebarazn.php?id=1
+http://morpher.ru/Demo.aspx?s=  http://www.zabaznov.ru/rusyaz.html  http://morpher.ru/SummaPro.aspx  http://morpher.ru/Demo.aspx http://www.tutoronline.ru/blog/prijomy-opredelenija-padezha           http://ask.hostenko.com/%D0%BA%D0%B0%D0%BA%D0%BE%D0%B9-%D0%BF%D0%B0%D0%B4%D0%B5%D0%B6-%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81-%D0%BA%D0%BE%D0%B3%D0%B4%D0%B0/
+http://rusgram.ru/%D0%A2%D0%B2%D0%BE%D1%80%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BF%D0%B0%D0%B4%D0%B5%D0%B6    http://school-collection.edu.ru/            http://www.de-online.ru/index/predlogi_s_dativ/0-65   http://www.de-online.ru/index/urok_n15_padezhi_v_nemeckom_jazyke/0-881      http://mylanguages.org/russian_vocabulary.php
+http://1001test.com/account/1  http://kayzen.az/blog/rus-dili/131/soyti-yoxsa-vyyti.html   http://kayzen.az/blog/rus-dili/150/t%C9%99l%C9%99ff%C3%BCz-qaydalar%C4%B1.html        http://exeterchessclub.org.uk/   http://exeterchessclub.org.uk/content/canon#themes    https://www.englishelp.ru/business-english/english-letters/198-final-phrase-in-letter.html
+
+ls -g {,/usr{,/local}}/bin | grep python
+
+http://graphemica.com     Ə - &#399;   ə - &#601;   Ü - &Uuml;  ü - &uuml;  ı - &#305;  Ğ - &#286;  ğ - &#287;  Ö – &Ouml;  ö - &ouml;  Ç – &Ccedil;  ç – &ccedil;  Ş – &#350;  ş – &#351;
+
+%C4%B1  ı    %C9%99  ə    %C5%9F  ş    %C3%BC  ü     %C5%9F  ş    %C5%9E  Ş    %C3%B6  ö    %C4%B0  İ    %C6%8F  Ə    %C3%9C  Ü    %C4%9F  ğ    %C3%96  Ö     %C3%87  Ç    %C3%A7  ç 
+
+\\tsclient\C\Users\rvaismayilov\Downloads
+
+https://www.tecmint.com/centos-6-3-step-by-step-installation-guide-with-screenshots/
+
+PAN:   4203822125286892  Date:  08/18   CVV:   334    Cardholdername:  Test
+
+https://www.altaro.com/hyper-v/hyper-v-create-a-virtual-machine/     https://www.tecmint.com/centos-6-3-step-by-step-installation-guide-with-screenshots/
+
+$ vi /etc/inittab      Change: id:3:initdefault:   To: id:5:initdefault:
+
+http://www.idevelopment.info/data/Unix/Linux/LINUX_AddGNOMEToCentOSMinimalInstall.shtml
+http://landoflinux.com/linux_install_centos_64.html
+
+dmidecode --type 17     dmidecode --type memory     dmidecode -t 17    free -m     less /proc/meminfo     vmstat -s
+
+Прошу по возможности проверить, удачно ли прошла оплата
+Please, if possible, check whether the payment was successful
+
+# netstat -nr   # route -n   # ip route list    https://www.webhostinghero.com/add-a-user-to-sudoers-in-centos-linux/
+
+for i in $(find . -maxdepth 1 -type d) ; do 
+    echo -n $i": " ; 
+    (find $i -type f | wc -l) ; 
+done
+
+ls -1 . | wc -l   ls -1 | wc -l     ls -l | grep -v ^l | wc -l     ls -l | grep ^l | wc -l      ls -l | grep ^d | wc -l     ls -l | grep ^- | wc -l
+
+du -ks * | sort -n   total size for directories         du -hs * | sort -n
+
+zip -r filename.zip files        unzip filename.zip
+http://www.rhd.ru/docs/manuals/enterprise/RHEL-AS-2.1-Manual/getting-started-guide/s1-zip-tar.html
+
+export -p    ps -p 2    lspci   lsusb   env   set    fmt
+
+for Num in {138..150}; do ln -s "/home/files/video$Num" "v$Num" done
+
+> filename.txt  - empty file content 
+
+cat /proc/cpuinfo | grep "name" | cut -d : -f2 | uniq
+
+awk -F: '{ print $1 }' /etc/passwd | sort | nl         awk 'END { print NR }'  filename.txt        awk 'NR % 2 == 0' filename.txt 
+
+whereis java   which java   java -jar start.jar --version    java -jar start.jar --list-config    java -jar start.jar --list-modules    java -jar start.jar 
+
+ps -ef | grep -i java
+
+libgcrypt  install   ./autogen.sh    ./configure –enable-setcap-install   make      make install      ldconfig      wireshark
+
+https://docs.oracle.com/cd/B28359_01/server.111/b28310/create.htm#i1017640
+https://oracle-base.com/articles/misc/killing-oracle-sessions
+https://docs.oracle.com/cd/B19306_01/server.102/b14237/dynviews_2088.htm#REFRN30223
+https://habrahabr.ru/post/188010/
+https://www.pythoncentral.io/introduction-to-sqlite-in-python/
+http://www.tech-recipes.com/rx/55356/dml-ddl-dcl-and-tcl-statements-in-sql-with-examples/
+https://www.geeksforgeeks.org/python-list/
+
+http://www.dofactory.com/sql/tutorial
+
+https://docs.oracle.com/cd/B14117_01/server.101/b10755/dynviews_2010.htm
+http://oracledba.ru/fv11gr2/index.html
+http://www.oracletutorial.com/oracle-basics/oracle-alter-table-modify-column/
+https://www.geeksforgeeks.org/sql-creating-roles/
+
+ls *txt | grep -v "xtxt$"       ls *txt | grep -v "xtxt$"  > listfiles.txt       printf '%s\n' * > output.txt
+
+for filename in *.txt; do ls -ltr | awk '/txt/ {print $9}' > out1.txt; done
+file *
+sed -n '200,700p' inputfile.txt > output.txt 
+sed -ne '/^From this line string/,/^To this line string/p' install.log
+sed -ne '/^2018-04-30 14:41/,/^2018-04-30 14:45/p' 2018_04_30.stderrout.log
+
+# Terminal color 
+setterm -term linux -back black -fore white -clear
+
+tailf 2018_05_03.stderrout.log | awk -v ORS='\033[39m\n------------------------------------------ NEW LINE -----------------------------------------------\n' '/Authentication failed/ {print "\033[32m" $0} /Merchant not participating/ {print "\033[34m" $0}'
+
+getent passwd username | awk -F: '{print $NF}'
+https://www.shellhacks.com/awk-print-column-change-field-separator-linux-bash/
+https://www.tutorialspoint.com/unix_commands/getent.htm
+ls -l | awk '{print $9}' > outtt.txt
+tailf 2018_05_03.stderr.log | awk '{print NR ". " $0}'
+
+To print the length of the longest input line.
+awk '{ if (length($0) > max) max = length($0) } END { print max }' sample.txt
+
+# Random number 
+awk 'BEGIN { for (i = 1; i <= 7; i++) print int(101 * rand()) }'
+echo "1"$RANDOM"2"
+< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-12};echo;
+date +%s | sha256sum | base64 | head -c 32 ; echo
+openssl rand -base64 12
+date | md5sum 
+
+# I put this into my .bashrc
+
+random-string()
+{
+    cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${1:-32} | head -n 1
+}
+
+for i in {1..15}; do uuidgen; done
+r=( $(openssl rand 100000 | sha1sum) ); printf "%s${r[0]:0:13}\n"
+
+for i in {1..15556}; do uuidgen; done | awk '{print "\033[32m" $0 "\033[32m" $0 "\033[32m" $0 "\033[32m" $0 "\033[32m" $0}'
+#cat old.sh 2> filename.txt 
+#cat old.sh |& tee -a filename.txt
+
+# How to find Primary Group Membership?      getent group userName      id -Gn userName    groups root
+
+https://bash.cyberciti.biz/guide/The_bash_shell
+
+echo "Your UID : $UID"        echo "Your EID : $EUID"
+
+https://linux.101hacks.com/ps1-examples/change-prompt-background-color/
+
+export PS1="\e[0;34m\e[47m\u@\h \w> \e[m "
+
+size /usr/bin/lscpu
+
+# ss - socket statistics      ss -4 state listening    sar -n DEV 1 3
+
+# To List All Linux Commands
+compgen -c     compgen -c | grep find      compgen -c | wc -l     echo "$USER user can run $(compgen -c | wc -l) commands on $HOSTNAME."
+
+sudo lsof -i tcp:1522        netstat -tupn
+
+http://blog.powerbiz.net.au/fixes/how-to-turn-off-printer-redirection-for-remote-desktop-sessions-on-a-hyper-v-server-host/
+
+python -m pip --version
+
+export HISTFILESIZE=
+export HISTSIZE=
+export HISTTIMEFORMAT="[%F %T] "
+export HISTFILE=~/.bash_eternal_history
+
+awk -v ORS='\r\n' '1'  unixfile dosfile = unix 2 dos 
+ex -bsc '%!awk "{sub(/\r/,\"\")}1"' -cx file     = dos2unix         ex -bsc '%!awk "{sub(/$/,\"\r\")}1"' -cx file    = unix2dos
+
+Код партнера	ata382    Код пользователя	6838      Код партнера	rhe200     Код пользователя	5955
+
+for f in {0..99}; do mkdir -p $RANDOM; done       mkdir -p $RANDOM        mkdir -p epul_{1..200}      for ((i=1;i<=100;i++)); do mkdir  $i; done
+
+https://www.funrussian.com/2012/03/01/computer-words-russian/
+
+pkill -KILL -u userName   skill -STOP -u username  How To Halt/Stop a User    skill -CONT -u username Resume Halted User   skill -KILL -u  Kill and Logout a User    skill -KILL -v /dev/pts/*   Kill and Logout All Users     pkill -KILL -u   pkill -STOP -u  pkill -CONT -u 
+tcpdump -A -i eth3   https://danielmiessler.com/study/tcpdump/       https://www.tecmint.com/12-tcpdump-commands-a-network-sniffer-tool/
+qemu-img resize filename +15G
+select get_current_version from dual;  select * from "PG_TRANS";  desc PG_TRANS;
+ps -ef | grep pmon | grep -v grep   Get a list of the running databases 
+
+ls -1 /etc/ld.so.conf.d/   cat /etc/ld.so.conf   ldconfig -v | head   ldconfig -p | head -5
+
+ipcs -qa
+
+# atm.sh 
+#!/bin/bash
+echo -ne '\n' | atm_ctl 2 1020 && sleep 5 && echo -ne '\n' | atm_ctl 4 1020 && sleep 34 && echo -ne '\n' | atm_ctl 5 1020 && sleep 34 && echo -ne '\n' | atm_ctl 6 1020 && sleep 5 && echo -ne '\n'$
+
+
+:%s/VISTA/ASD/g
+
+select get_current_version from dual;
+
+http://www.orafaq.com/node/2891
+
+ALTER SESSION SET TRACEFILE_IDENTIFIER = "BPCPAC";
+ALTER SESSION SET EVENTS '10046 trace name context forever, level 8';
+ALTER SESSION SET sql_trace=TRUE;
+alter session set timed_statistics=true;
+
+split --lines=1000000 --numeric-suffixes --suffix-length=2 filename.txt newfl.txt 
+split --lines=1000000 filename.txt newfl.txt 
+split -l 1000000 filename.txt newfl.txt
+split -b 100M filename.txt newfl.txt
+
+ls -lh | tail -n +2
+
+http://dualtable.ru/trassirovka-sessii-oracle-database
+http://www.sql.ru/faq/faq_topic.aspx?fid=389
+https://docs.oracle.com/cd/B10501_01/server.920/a96533/sqltrace.htm
+https://oracle-base.com/articles/8i/tkprof-and-oracle-trace
+
+stat --format='AT:%x MT:%y CT:%z' /opt/jetty92/tdumps
+stat /opt/jetty92/tdumps
+readlink -f $(which java)
+update-alternatives --config java 
+update-alternatives --display java
+
+
+dd if=/dev/null of=access.log
+cat /dev/null > access.log
+: > access.log
+true > access.log
+truncate -s 0 access.log
+ 
+
+https://www.vultr.com/docs/how-to-install-apache-tomcat-8-on-centos-7
+
+cp /boot/vmlinuz-2.6.32-573.el6.i686 .
+
+od -A d -t x1 vmlinuz-2.6.32-573.el6.i686 \ 
+> | grep '1f 8b 08 00'
+
+ 
+ntsysv --back 
+
+mv initramfs-2.6.32-573.el6.i686.img \
+> initramfs-2.6.32-573.el6.i686.img
+
+gzip -d initramfs-2.6.32-573.el6.i686.img.gz
+dd if=vmlinuz-2.6.32-573.el6.i686 bs=1 skip=13932| zcat > vmlinux
+objdump -f vmlinux
+readelf -h vmlinux
+
+cpio -ivdum < initramfs-2.6.32-573.el6.i686.img
+
+SSH Configure 
+$ ssh-keygen -t key_type -b bits -C "comment"
+$ ssh-keygen -t ed25519 -C "Login to production cluster at xyz corp"
+$ ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa_aws_$(date +%Y-%m-%d) -C "AWS key for abc corp clients"
+
+Next, install the public key using ssh-copy-id command:
+$ ssh-copy-id -i /path/to/public-key-file user@host
+$ ssh-copy-id user@remote-server-ip-or-dns-name
+$ ssh-copy-id vivek@rhel7-aws-server
+
+##############################################
+
