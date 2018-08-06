@@ -1,0 +1,26 @@
+import glob , os, datetime, shutil
+
+def GetFileList(path, type):
+    return glob.glob(path + "*" + type)
+
+originPath = ("C:\\Users\\Desktop\\")
+destinationPath = ("C:\\Users\\Desktop\\TMP\\")
+fileType = "*.*"
+
+fileList = GetFileList(originPath, fileType)
+
+for file in fileList:
+
+    modifyDate = datetime.datetime.fromtimestamp(os.path.getmtime(file))
+    todaysDate = datetime.datetime.today()
+    
+    filePathList = file.split("\\")
+    filename = filePathList[-1]
+    
+    modifyDateLimit = modifyDate + datetime.timedelta(hours=1)
+
+    if modifyDateLimit > todaysDate:
+        shutil.copy2(file, destinationPath + filename)
+        print("Files have been copied")
+
+
