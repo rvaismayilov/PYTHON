@@ -1,0 +1,18 @@
+import os, glob, time, sys, subprocess
+
+os.chdir("C:\\Users\\rvaismayilov\\Desktop\\")
+print(os.getcwd())
+
+path_to_watch = ("C:\\Users\\rvaismayilov\\Desktop\\")
+
+os.listdir("C:\\Users\\rvaismayilov\\Desktop\\")[2]
+
+while True:
+    for file in glob.glob('*.txt'):
+     #   print ('DEBUG: file=>{0}<'.format(file))
+        with open(file) as f:
+            contents = f.read()
+        if 'PASSWORDEXPIRATION' in contents:
+            print ("{} -> {}".format(file, time.ctime(os.path.getmtime(file))))
+            
+        time.sleep(1)
