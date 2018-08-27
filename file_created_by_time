@@ -1,0 +1,22 @@
+import os, glob, time, sys, subprocess, datetime
+from datetime import datetime
+
+
+path_to_watch=("C:\\Users\\rvaismayilov\\Desktop\\")
+
+os.chdir(".")
+
+print(os.getcwd())
+
+os.path.getmtime(".")
+n = datetime.now()
+while True:
+    for file in glob.glob('*.txt'):
+           #print ('DEBUG: file=>{0}<'.format(file))
+        with open(file) as f:
+            contents = f.read()
+        if 'PASSWORDEXPIRATION' in contents:
+            print("Created: %s" % time.ctime(os.path.getctime(file)))
+            #print (path_to_watch + "{} -> {}".format(file, time.ctime(os.path.getmtime(file))))
+        time.sleep(5)
+
