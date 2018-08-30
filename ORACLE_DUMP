@@ -1,0 +1,18 @@
+https://docs.oracle.com/cd/E11882_01/server.112/e22490/dp_overview.htm#SUTIL807
+https://oracle-base.com/articles/10g/oracle-data-pump-10g
+
+
+A full schema export (metadata and contents) would indeed look like:
+
+expdp user/pass schemas=<schemaname> directory=dumpdir \
+      dumpfile=<schemaname>.dmp \
+      logfile=expdp_<schemaname>.log
+If you want to import to a different user/schema (the target database can be the same as the source), you can use:
+
+impdp user/pass schemas=schema1 directory=dumpdir \
+      remap_schema=schema1:schema2 \
+      dumpfile=schema1.dmp \
+      logfile=impdp_schema2.log
+	  
+	  
+	  
