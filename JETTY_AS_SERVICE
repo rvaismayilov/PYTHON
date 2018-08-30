@@ -1,0 +1,22 @@
+JETTY_HOME     =  /opt/jetty
+JETTY_CONF     =  /opt/jetty/etc/jetty.conf
+JETTY_RUN      =  /var/run
+JETTY_PID      =  /var/run/jetty.pid
+JETTY_ARGS     =  etc/jetty-ssl.xml
+CONFIGS        =  --pre=etc/jetty-logging.xml
+JAVA_OPTIONS   =   -XX:MaxPermSize=512m -Xmx2G -Djetty.home=/opt/jetty -Djava.io.tmpdir=/tmp
+JAVA           =  /usr/java/jdk1.7.0_17/bin/java
+RUN_CMD        =  /usr/java/jdk1.7.0_17/bin/java
+Checking arguments to Jetty: 
+JETTY_HOME     =  /opt/jetty
+JETTY_CONF     =  /opt/jetty/etc/jetty.conf
+JETTY_RUN      =  /var/run
+JETTY_PID      =  /var/run/jetty.pid
+JETTY_PORT     =  
+JETTY_LOGS     =  
+START_INI      =  /opt/jetty/start.ini
+CONFIGS        =  --pre=etc/jetty-logging.xml
+JAVA_OPTIONS   =   -XX:MaxPermSize=512m -Xmx2G -Djetty.home=/opt/jetty -Djava.io.tmpdir=/tmp
+JAVA           =  /usr/java/jdk1.7.0_17/bin/java
+CLASSPATH      =  
+RUN_CMD        =  /usr/java/jdk1.7.0_17/bin/java -XX:MaxPermSize=512m -Xmx2G -Djetty.home=/opt/jetty -Djava.io.tmpdir=/tmp -jar /opt/jetty/start.jar etc/jetty-ssl.xml --pre=etc/jetty-logging.xml
