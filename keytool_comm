@@ -1,0 +1,31 @@
+keytool -selfcert -alias Test -genkey -keystore temp.keystore -keyalg RSA -validity 365
+keytool -genkey -alias prodserver -keyalg RSA -keysize 2048 -keystore prodservermykeystore
+keytool -certreq -keyalg RSA -alias prodserver -file prodservercertreq.csr -keystore prodservermykeystore
+keytool -import -alias joe -file jcertfile.cer
+http://www.tutorialspoint.com/unix_commands/keytool.htm
+keytool -printcert -file /tmp/cert
+keytool -export -alias jane -file janecertfile.cer
+keytool -list -alias joe
+keytool -list
+keytool -printcert -file certfile.cer
+keytool  -list -alias visa_new -storetype keystore -keystore keystore -storepass 123456
+keytool -genkey -dname "cn=Mark Jones, ou=Java, o=Sun, c=AZ" -alias business -keypass kpi135 -keystore /opt/jetty9/config/temp.keystore -storepass 123456 -validity 365
+keytool -printcert -file VScert.cer
+keytool -import -keystore mpi_keystore.jks -storepass M@med517 -trustcacerts -file 3dsfraudbase64.cer -alias fraudcontrol
+
+
+keytool -list -keystore mpi_keystore.jks -storepass M@med517
+keytool -list -v -keystore mpi_keystore.jks -storepass M@med517
+openssl req -in mpi_visa_new.csr -noout -text
+openssl pkcs12 -info -in mpi_visa_new.pfx
+openssl x509 -in 3ds.crt -text -noout
+openssl x509 -in epul.crt -text -noout
+openssl rsa -in 3ds.key -check
+openssl x509 -enddate -noout -in 3ds.crt
+openssl x509 -enddate -noout -in SSL_CA_Bundle.pem
+
+keytool -list -v -alias mpi_visa -keystore mpi_keystore.jks -storepass M@med517 | grep "Valid from:"
+
+keytool -list -v -keystore mpi_keystore.jks -storepass M@med517 | grep "Valid from:"
+
+keytool -list -v -alias <alias> -keystore <keystore> -storepass <passwd> | grep "Valid from:"
