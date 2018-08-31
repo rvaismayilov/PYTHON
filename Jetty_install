@@ -1,0 +1,33 @@
+cd /opt/jetty/bin/
+chmod +x jetty.sh
+
+cp bin/jetty.sh /etc/init.d/jetty
+echo JETTY_HOME=`pwd` > /etc/default/jetty
+cat /etc/default/jetty
+service jetty start
+
+useradd --user-group --shell /bin/false --home-dir /opt/jetty/temp jetty
+java -jar /opt/jetty/start.jar --add-to-start=deploy,http,logging
+grep jetty.port /opt/jetty/start.ini
+echo "JETTY_BASE=/opt/jetty/webapps" >> /etc/default/jetty
+echo "TMPDIR=/opt/jetty/temp" >> /etc/default/jetty
+
+echo "JETTY_BASE=/opt/jetty/" >> /etc/default/jetty
+echo "TMPDIR=/opt/jetty/" >> /etc/default/jetty
+
+
+grep jetty.port /opt/web/mybase/start.ini
+chown --recursive jetty /opt/jetty
+chown --recursive jetty /opt/web/mybase
+
+cp /opt/jetty/bin/jetty.sh /etc/init.d/jetty
+echo "JETTY_HOME=/opt/jetty/" > /etc/default/jetty
+echo "JETTY_BASE=/opt/web/mybase" >> /etc/default/jetty
+echo "TMPDIR=/opt/jetty/temp" >> /etc/default/jetty
+
+
+cp bin/jetty9.sh /etc/init.d/jetty9
+echo JETTY_HOME=`pwd` > /etc/default/jetty9
+cat /etc/default/jetty9
+useradd --user-group --shell /bin/false --home-dir /opt/jetty9/temp jetty9
+java -jar /opt/jetty9/start.jar --add-to-start=deploy,http,logging
